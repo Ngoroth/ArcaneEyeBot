@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
-using ArcaneEyeBot.Services;
+using ArcaneEyeBot.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace ArcaneEyeBot.Controllers
@@ -10,11 +13,13 @@ namespace ArcaneEyeBot.Controllers
     [ApiController]
     public class TelegramBotController : ControllerBase
     {
-        private readonly IUpdateService updateService;
+        private readonly TelegramBotClient telegramBotClient;
+        private readonly IPhotoMaker photoMaker;
 
-        public TelegramBotController(IUpdateService updateService)
+        public TelegramBotController(IOptions<BotConfiguration> botConfig, IPhotoMaker photoMaker)
         {
-            this.updateService = updateService;
+            this.telegramBotClient = new TelegramBotClient(botConfig.Value.BotToken);
+            this.photoMaker = photoMaker;
         }
 
         [HttpPost]
@@ -22,10 +27,33 @@ namespace ArcaneEyeBot.Controllers
         {
             try
             {
-                await this.updateService.HandleUpdate(update);
+                if (update.Message.Type != Telegram.Bot.Types.Enums.MessageType.Text)
+                {
+                    return this.Ok();
+                }
+
+                if (update.Message.Entities != null
+                    && update.Message.Entities.Any(e => e.Type == Telegram.Bot.Types.Enums.MessageEntityType.BotCommand))
+                {
+                    switch (update.Message.Text)
+                    {
+                        case "/makephoto":
+                            var fileName = this.photoMaker.MakePhoto();
+
+                            using (var stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open))
+                            {
+                                await this.telegramBotClient.SendPhotoAsync(update.Message.Chat.Id, new Telegram.Bot.Types.InputFiles.InputOnlineFile(stream));
+                            }
+
+                            System.IO.File.Delete(fileName);
+                            break;
+
+                    }
+                }
             }
             catch (Exception e)
             {
+                await this.telegramBotClient.SendTextMessageAsync(update.Message.Chat.Id, e.Message);
                 this.StatusCode(500);
             }
             

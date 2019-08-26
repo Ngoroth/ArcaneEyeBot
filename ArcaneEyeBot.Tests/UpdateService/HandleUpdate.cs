@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using ArcaneEyeBot.Core.PhotoMakers;
+using FakeItEasy;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -18,7 +19,7 @@ namespace ArcaneEyeBot.Tests.UpdateService
         {
             var botConfigOptions = Options.Create<BotConfiguration>(new BotConfiguration { BotToken = "900742144:AAFEjD6QzgEOQw8jB0b0DXsmslXxYTQqxBw" });
             var botService = new Services.BotService(botConfigOptions);
-            var photoService = new Services.PhotoService();
+            var photoService = new OpenCVSharpPhotoMaker();
             var updateService = new Services.UpdateService(botService, photoService);
 
             //var update = A.Fake<Update>(builder => builder.ConfigureFake(upd => new Update { 
