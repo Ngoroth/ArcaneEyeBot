@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ArcaneEyeBot.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using MihaZupan;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -18,7 +19,11 @@ namespace ArcaneEyeBot.Controllers
 
         public TelegramBotController(IOptions<BotConfiguration> botConfig, IPhotoMaker photoMaker)
         {
-            this.telegramBotClient = new TelegramBotClient(botConfig.Value.BotToken);
+            this.telegramBotClient = string.IsNullOrEmpty(botConfig.Value.Socks5Host)
+                ? new TelegramBotClient(botConfig.Value.BotToken)
+                : new TelegramBotClient(
+                    botConfig.Value.BotToken,
+                    new HttpToSocks5Proxy(botConfig.Value.Socks5Host, botConfig.Value.Socks5Port));
             this.photoMaker = photoMaker;
         }
 
@@ -53,7 +58,7 @@ namespace ArcaneEyeBot.Controllers
             }
             catch (Exception e)
             {
-                await this.telegramBotClient.SendTextMessageAsync(update.Message.Chat.Id, e.Message);
+                //await this.telegramBotClient.SendTextMessageAsync(update.Message.Chat.Id, e.Message);
                 this.StatusCode(500);
             }
             

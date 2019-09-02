@@ -1,13 +1,49 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OpenCvSharp4" Version="4.1.0.20190416" />
-    <PackageReference Include="OpenCvSharp4.runtime.ubuntu.18.04-x64" Version="4.1.0.20190416" />
-    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.1.0.20190416" />
+    <None Remove="EmguDlls\Emgu.CV.dll" />
+    <None Remove="EmguDlls\Emgu.CV.UI.dll" />
+    <None Remove="EmguDlls\Emgu.Util.dll" />
+    <None Remove="EmguDlls\opencv_core220.dll" />
+    <None Remove="EmguDlls\opencv_imgproc220.dll" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="EmguDlls\Emgu.CV.dll" />
+    <Content Include="EmguDlls\Emgu.CV.UI.dll" />
+    <Content Include="EmguDlls\Emgu.Util.dll" />
+    <Content Include="EmguDlls\opencv_core220.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmguDlls\opencv_imgproc220.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="OpenCvSharp3-AnyCPU" Version="4.0.0.20181129" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Emgu.CV">
+      <HintPath>EmguDlls\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>EmguDlls\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>EmguDlls\Emgu.Util.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="opencv_core220.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="opencv_imgproc220.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
