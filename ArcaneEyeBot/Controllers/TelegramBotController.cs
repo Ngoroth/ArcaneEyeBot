@@ -23,7 +23,7 @@ namespace ArcaneEyeBot.Controllers
                 ? new TelegramBotClient(botConfig.Value.BotToken)
                 : new TelegramBotClient(
                     botConfig.Value.BotToken,
-                    new HttpToSocks5Proxy(botConfig.Value.Socks5Host, botConfig.Value.Socks5Port));
+                    new HttpToSocks5Proxy(botConfig.Value.Socks5Host, botConfig.Value.Socks5Port, botConfig.Value.Login, botConfig.Value.Password));
             this.photoMaker = photoMaker;
         }
 
