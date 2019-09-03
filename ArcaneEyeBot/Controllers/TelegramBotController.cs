@@ -43,7 +43,7 @@ namespace ArcaneEyeBot.Controllers
                     switch (update.Message.Text)
                     {
                         case "/makephoto":
-                            var fileName = this.photoMaker.MakePhoto();
+                            var fileName = await this.photoMaker.MakePhoto();
 
                             using (var stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open))
                             {
@@ -52,13 +52,12 @@ namespace ArcaneEyeBot.Controllers
 
                             System.IO.File.Delete(fileName);
                             break;
-
                     }
                 }
             }
             catch (Exception e)
             {
-                //await this.telegramBotClient.SendTextMessageAsync(update.Message.Chat.Id, e.Message);
+                await this.telegramBotClient.SendTextMessageAsync(update.Message.Chat.Id, e.Message);
                 this.StatusCode(500);
             }
             

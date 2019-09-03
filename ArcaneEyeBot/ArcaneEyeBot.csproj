@@ -12,31 +12,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HttpToSocks5Proxy" Version="1.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="RaspberryCam" Version="1.0.0" />
     <PackageReference Include="Telegram.Bot" Version="15.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ArcaneEyeBot.Core\ArcaneEyeBot.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="avicap32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="avifil32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="msacm32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="msvfw32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

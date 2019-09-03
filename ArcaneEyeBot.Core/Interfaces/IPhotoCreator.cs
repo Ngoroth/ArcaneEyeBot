@@ -1,4 +1,6 @@
-﻿namespace ArcaneEyeBot.Core.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace ArcaneEyeBot.Core.Interfaces
 {
     public interface IPhotoMaker
     {
@@ -6,6 +8,6 @@
         /// Make photo in base directory
         /// </summary>
         /// <returns>Photo filename</returns>
-        string MakePhoto();
+        Task<string> MakePhoto();
     }
 }

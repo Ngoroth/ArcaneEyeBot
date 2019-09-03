@@ -6,26 +6,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="EmguDlls\Emgu.CV.dll" />
-    <None Remove="EmguDlls\Emgu.CV.UI.dll" />
-    <None Remove="EmguDlls\Emgu.Util.dll" />
-    <None Remove="EmguDlls\opencv_core220.dll" />
-    <None Remove="EmguDlls\opencv_imgproc220.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EmguDlls\Emgu.CV.dll" />
-    <Content Include="EmguDlls\Emgu.CV.UI.dll" />
-    <Content Include="EmguDlls\Emgu.Util.dll" />
-    <Content Include="EmguDlls\opencv_core220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmguDlls\opencv_imgproc220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="OpenCvSharp3-AnyCPU" Version="4.0.0.20181129" />
-    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+    <PackageReference Include="RaspberryCam" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
@@ -39,9 +20,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Update="opencv_core220.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="opencv_imgproc220.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
