@@ -8,20 +8,4 @@
   <ItemGroup>
     <PackageReference Include="RaspberryCam" Version="1.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Emgu.CV">
-      <HintPath>EmguDlls\Emgu.CV.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.UI">
-      <HintPath>EmguDlls\Emgu.CV.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.Util">
-      <HintPath>EmguDlls\Emgu.Util.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="opencv_imgproc220.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>
