@@ -34,6 +34,8 @@ namespace ArcaneEyeBot.Core.PhotoMakers
         {
             var filePath = $"{Guid.NewGuid()}.jpg";
 
+            this.cameraDriver.GetVideoFrame();
+
             var frameBytes = this.cameraDriver.GetVideoFrame();
 
             File.WriteAllBytes(filePath, frameBytes);
